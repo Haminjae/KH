@@ -2,6 +2,8 @@ package com.kh.project.movie.view;
 
 import java.awt.Choice;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ public class MovieReservation extends JFrame{
 	JButton next, cancle;
 	ImageIcon batman, innocence, live, onward;
 	int ticketnum, choicetime;
+	JFrame frame;
 	
 	public MovieReservation() {
 		setSize(500,400);
@@ -34,6 +37,7 @@ public class MovieReservation extends JFrame{
 		child = new JLabel("청소년 : ");
 		
 		ticketnum = (int)(Math.random()*999999999);
+		
 		
 		 
 		
@@ -101,6 +105,33 @@ public class MovieReservation extends JFrame{
 		image8 = new JLabel(new ImageIcon(icon4));
 		image8.setBounds(340, 5, 100, 150);
 		add(image8);
+		
+		MovieReservation mr = new MovieReservation();
+		
+		next.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.remove(mr);
+				frame.setTitle("좌석 선택");
+				frame.add(next);
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
+		
+		cancle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.remove(next);
+				frame.setTitle("영화 예매");
+				frame.add(mr);
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
+		
+		
+		
 		
 		name.setBounds(20, 160, 70, 30);
 		moviename.setBounds(100, 160, 200, 30);
